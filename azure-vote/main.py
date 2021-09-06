@@ -9,7 +9,7 @@ from datetime import datetime
 
 # App Insights
 # TODO: Import required libraries for App Insights
-
+'''
 # Logging
 logger = # TODO: Setup logger
 
@@ -18,12 +18,12 @@ exporter = # TODO: Setup exporter
 
 # Tracing
 tracer = # TODO: Setup tracer
-
+'''
 app = Flask(__name__)
-
+'''
 # Requests
 middleware = # TODO: Setup flask middleware
-
+'''
 # Load configurations from environment or config file
 app.config.from_pyfile('config_file.cfg')
 
