@@ -31,23 +31,23 @@ config_integration.trace_integrations(['logging'])
 config_integration.trace_integrations(['requests'])
 # Standard Logging
 logger = logging.getLogger(__name__)
-handler = AzureLogHandler(connection_string='InstrumentationKey=92717894-5e89-44b2-b30e-81f166dd2ce9;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/')
+handler = AzureLogHandler(connection_string='InstrumentationKey=92717894-5e89-44b2-b30e-81f166dd2ce9')
 handler.setFormatter(logging.Formatter('%(traceId)s %(spanId)s %(message)s'))
 logger.addHandler(handler)
 # Logging custom Events 
-logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=92717894-5e89-44b2-b30e-81f166dd2ce9;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/'))
+logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=92717894-5e89-44b2-b30e-81f166dd2ce9'))
 # Set the logging level
 logger.setLevel(logging.INFO)
 
 # Metrics
 exporter = metrics_exporter.new_metrics_exporter(
-enable_standard_metrics=True,
-connection_string='InstrumentationKey=92717894-5e89-44b2-b30e-81f166dd2ce9;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/')
+    enable_standard_metrics=True,
+    connection_string='InstrumentationKey=92717894-5e89-44b2-b30e-81f166dd2ce9')
 view_manager.register_exporter(exporter)
 # Tracing
 tracer = Tracer(
  exporter=AzureExporter(
-     connection_string='InstrumentationKey=92717894-5e89-44b2-b30e-81f166dd2ce9;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/'),
+     connection_string='InstrumentationKey=92717894-5e89-44b2-b30e-81f166dd2ce9'),
  sampler=ProbabilitySampler(1.0),
 )
 
@@ -56,7 +56,7 @@ app = Flask(__name__)
 # Requests
 middleware = FlaskMiddleware(
  app,
- exporter=AzureExporter(connection_string="InstrumentationKey=92717894-5e89-44b2-b30e-81f166dd2ce9;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/"),
+ exporter=AzureExporter(connection_string="InstrumentationKey=92717894-5e89-44b2-b30e-81f166dd2ce9"),
  sampler=ProbabilitySampler(rate=1.0)
 )
 # Load configurations from environment or config file
